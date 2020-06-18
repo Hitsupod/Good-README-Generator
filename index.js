@@ -96,34 +96,46 @@ inqPromise.then(function(data){
 ${data.title}
 ## Description
 ${data.description}
-## Table of Contents    
-    Usage
-    License
-    Contributing
-    Tests
-    Questions
-    Installation
-
+## Table of Contents  
+    1. Installation(#installation)
+    2. Usage(#usage)
+    3. License(#license)
+    4. Contributing(#guidlines)
+    5. Tests(#testin)
+    6. Questions(#questions)
+    
+<a name = 'installation'></a>
 ## Installation
 ${data.installation}
+
+<a name = 'usage'></a>
 ## Usage
 ${data.usage}
+
+<a name = 'license'></a>
 ## License
 ${data.license}
+
+<a name = 'guidelines'></a>
 ## Contributing
 ${data.guidelines}
+
+<a name = 'testin'></a>
 ## Tests
 ${data.testin}
+
+<a name = 'questions'></a>
 ## Questions
+You can reach me at hitsupod@gmail.com
 ${data.email}
 ${data.github}
     `;
     let writePromise = writeFileAsync("ReadME2.md", readME, 'utf8');
     writePromise.then(function() {
         console.log("Completed");
-    }).catch(function(err) {
+    }).catch(function(error) {
         console.log('Error Found');
-        console.log(err);
+        console.log(error);
     })
     // console.log(data.title);
     // console.log(data.github);
