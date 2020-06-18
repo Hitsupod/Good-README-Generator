@@ -1,6 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const util = require('util');
+const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 // THEN this is displayed as the title of the README
@@ -16,76 +16,122 @@ const writeFileAsync = util.promisify(fs.writeFile);
 // THEN I am taken to the corresponding section of the README
 
 function promptUser() {
-    return inquirer.prompt() [
-// Project Title
-        {
-        type: 'input',
-        message: 'What is the title of this Project?',
-        title: 'title'
-        },
+    return inquirer.prompt( 
+        [
+    // Project Title
+            {
+            type: 'input',
+            message: 'What is the title of this Project?',
+            name: 'title'
+            },
 
-// Description 
-        {
-        type: 'input',
-        message: 'Breif Description:',
-        title: 'description'
-        },
+    // Description 
+            {
+            type: 'input',
+            message: 'Breif Description:',
+            name: 'description'
+            },
 
-// Installation Instructions
-        {
-        type: 'input',
-        message: 'Installation Instructions:',
-        title: 'installation'
-        },
+    // Installation Instructions
+            {
+            type: 'input',
+            message: 'Installation Instructions:',
+            name: 'installation'
+            },
 
-// Usage Information
-        {
-        type: 'input',
-        message: 'Usage Information:',
-        title: 'usage'
-        },
+    // Usage Information
+            {
+            type: 'input',
+            message: 'Usage Information:',
+            name: 'usage'
+            },
 
-// Contribution Guidelines
-        {
-        type: 'input',
-        message: 'Contribution Guidelines:',
-        title: 'guidelines'
-        },
-    
-// Test Instructions
-        {
-        type: 'input',
-        message: 'Test Instructions:',
-        title: 'testin'
-        },
+    // Contribution Guidelines
+            {
+            type: 'input',
+            message: 'Contribution Guidelines:',
+            name: 'guidelines'
+            },
+        
+    // Test Instructions
+            {
+            type: 'input',
+            message: 'Test Instructions:',
+            name: 'testin'
+            },
 
-// License Choice 
-        {
-        type: "checkbox",
-        message: "Which license?",
-        name: "license",
-        choices: [
-        '1',
-        '2',
-        '3',
-        '4'
-        ]},
+    // License Choice 
+            {
+            type: "checkbox",
+            message: "Which license?",
+            name: "license",
+            choices: [
+            '1',
+            '2',
+            '3',
+            '4'
+            ]},
 
-// GitHub Username
-        {
-        type: 'input',
-        message: 'Github:',
-        title: 'github'
-        },
+    // GitHub Username
+            {
+            type: 'input',
+            message: 'Github URL:',
+            name: 'github'
+            },
 
-// Email Address
-        {
-        type: 'input',
-        message: 'Email Address:',
-        title: 'email'
-        }
-    ]
+    // Email Address
+            {
+            type: 'input',
+            message: 'Email Address:',
+            name: 'email'
+            }
+        ]   
+    );
 }
+
+inqPromise = promptUser();
+inqPromise.then(function(data){
+    let readME = `
+# Title
+${data.title}
+## Description
+${data.description}
+## Table of Contents    
+    Usage
+    License
+    Contributing
+    Tests
+    Questions
+    Installation
+
+## Installation
+${data.installation}
+## Usage
+${data.usage}
+## License
+${data.license}
+## Contributing
+${data.guidelines}
+## Tests
+${data.testin}
+## Questions
+${data.email}
+${data.github}
+    `;
+    let writePromise = writeFileAsync("ReadME2.md", readME, 'utf8');
+    writePromise.then(function() {
+        console.log("Completed");
+    }).catch(function(err) {
+        console.log('Error Found');
+        console.log(err);
+    })
+    // console.log(data.title);
+    // console.log(data.github);
+    // console.log(data.description);
+}).catch(function(error) {
+    console.log('Error With Inquirer Prompt ');
+    console.log(error);
+})
 
 
 // fs.writeFile("README.md", process.argv[2], function(err) {
