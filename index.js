@@ -66,10 +66,10 @@ function promptUser() {
             message: "Which license?",
             name: "license",
             choices: [
-            '1',
-            '2',
-            '3',
-            '4'
+            'Photoshop',
+            'Premiere',
+            'Lightroom',
+            'Illustrator'
             ]},
 
     // GitHub Username
@@ -92,44 +92,42 @@ function promptUser() {
 inqPromise = promptUser();
 inqPromise.then(function(data){
     let readME = `
-# Title
-${data.title}
+# ${data.title}
+
 ## Description
 ${data.description}
+
 ## Table of Contents  
-    1. Installation(#installation)
-    2. Usage(#usage)
-    3. License(#license)
-    4. Contributing(#guidlines)
-    5. Tests(#testin)
-    6. Questions(#questions)
+    1. Installation
+    2. Usage
+    3. License
+    4. Contributing
+    5. Tests
+    6. Questions
     
-<a name = 'installation'></a>
 ## Installation
 ${data.installation}
 
-<a name = 'usage'></a>
 ## Usage
 ${data.usage}
 
-<a name = 'license'></a>
 ## License
 ${data.license}
 
-<a name = 'guidelines'></a>
 ## Contributing
 ${data.guidelines}
 
-<a name = 'testin'></a>
 ## Tests
 ${data.testin}
 
-<a name = 'questions'></a>
 ## Questions
-You can reach me at hitsupod@gmail.com
 ${data.email}
+
 ${data.github}
+
+## You can reach me at hitsupod@gmail.com
     `;
+
     let writePromise = writeFileAsync("ReadME2.md", readME, 'utf8');
     writePromise.then(function() {
         console.log("Completed");
@@ -144,12 +142,3 @@ ${data.github}
     console.log('Error With Inquirer Prompt ');
     console.log(error);
 })
-
-
-// fs.writeFile("README.md", process.argv[2], function(err) {
-
-  
-
-  //console.log("Success!");
-
-// });
